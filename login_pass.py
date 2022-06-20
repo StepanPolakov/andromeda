@@ -1,0 +1,102 @@
+import random
+KEY=3
+def crypt_password(password,key):
+    crypt=''#зашифрованный пароль
+    for bukva in password:
+        #print(ord(bukva))
+        crypt+=chr(ord (bukva)^key)
+    return (crypt)
+def registration():
+
+    '''
+    Реггистрация нового пользователя
+    '''
+    print('Давайте я вас запишу в список пользователей')
+    login= input('введите ваш логин: ')
+    password=input('введите ваш пароль:')
+    
+    file = open('logins.txt', mode='a',encoding='utf-8')
+    file.write(f'{login}'+' ')
+    file.close()
+
+    file = open('passwords.txt', mode='a',encoding='utf-8')
+    file.write(f'{crypt_password(password,key=3)}'+ ' ')
+    file.close()
+
+def read_users(filename):
+    file = open(filename, mode='r',encoding='utf-8')  
+    data=file.read()  
+    return data.split()
+
+def sign_in(flag):
+    login_list=read_users('logins.txt')
+    password_list=read_users('passwords.txt')
+
+    login= input('введите ваш логин: ')
+    print(f'вы ввели {login}')
+    password=input('введите ваш пароль:')
+    print(f'Логин: {login}, пароль: {password}')
+    
+    if login in login_list and crypt_password(password,key=KEY) in password_list:
+        print('вы вошли в свой гитхаб')
+        flag=True#система разблокированна
+    elif login=='vanya' and password=='69420' :
+        print('вы вошли в свой гитхаб')
+    elif password==''and password =='':
+        print('вы не ввели и логин,и пароль')
+    elif password=='':       
+        print('вы не ввели пароль')
+    elif login=='':
+       
+        print('вы не ввели логин')   
+    else:
+        chanse=random.randint(1,2)
+        if chanse==1:
+            print('ха ха, не верно')
+        elif chanse==2:
+            print('Ты не пройдёшь!')
+    return flag
+
+login_list=read_users('logins.txt')
+password_list=read_users('passwords.txt')
+
+    
+flag=False
+while True:#о тех пор пока заблокировано
+    if flag==False:#если мы не вошли
+        way=input('Что вы хотите сделать? 1-зарегистрироваться ,2-войти ')
+        if way=='1':
+            registration()
+        if way=='2': 
+            flag = sign_in(flag) 
+    else:#если уже вошли
+        print()  
+        way=input('Что вы хотите сделать? 1-выйти из аккаунта 2-выйти из программы>>>''')
+        if way=='1':
+            flag= False
+        if way=='2':
+          print('Всего доброго!')
+          break
+# if flag==True:  
+#     vegetables=116
+#     children=23
+#     print (vegetables//children)
+#     money=38564
+#     bublegum=17
+#     print(money//bublegum)
+#     print(f'Саша купит {money//bublegum} жевачек')
+#     print(f'останется {money%bublegum} рублей')
+#     money=5000
+#     fruits=60/2+20*3
+#     fruits_with_sale=0.8*fruits
+#     sweets=500
+#     print(money-fruits_with_sale-sweets)
+#     money=700
+#     note=35+0.1*35
+#     print(money//note)
+#     print(f'масимум {money//note} блокнотов')
+#     bread='батон'
+#     eggs=True
+#     if eggs==True:    
+#         print(10*bread)
+ 
