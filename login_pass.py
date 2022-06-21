@@ -1,11 +1,14 @@
 import random
+import number_game
 KEY=3
 def crypt_password(password,key):
+
     crypt=''#зашифрованный пароль
     for bukva in password:
         #print(ord(bukva))
         crypt+=chr(ord (bukva)^key)
     return (crypt)
+
 def registration():
 
     '''
@@ -26,9 +29,10 @@ def registration():
 def read_users(filename):
     file = open(filename, mode='r',encoding='utf-8')  
     data=file.read()  
+    file.close()
     return data.split()
 
-def sign_in(flag):
+def sign_in(flag): 
     login_list=read_users('logins.txt')
     password_list=read_users('passwords.txt')
 
@@ -55,28 +59,45 @@ def sign_in(flag):
             print('ха ха, не верно')
         elif chanse==2:
             print('Ты не пройдёшь!')
-    return flag
+    return flag,login
 
-login_list=read_users('logins.txt')
-password_list=read_users('passwords.txt')
+def chat(login):
+    file = open('chat.txt', mode='r',encoding='utf-8')
+    data=file.read()
+    print(data)
+    file.close()
+    file = open('chat.txt', mode='a',encoding='utf-8')#append
+    while True:
+        your_message=input('Сообщение:')
+        if your_message=='exit':
+            break
+        file.write(f'\n{login}:{your_message} ')
+    file.close()
+
+login_list=read_users('logins.txt')#список логинов
+password_list=read_users('passwords.txt')#список паролей
 
     
 flag=False
-while True:#о тех пор пока заблокировано
+while True:#до тех пор пока заблокировано
     if flag==False:#если мы не вошли
         way=input('Что вы хотите сделать? 1-зарегистрироваться ,2-войти ')
         if way=='1':
             registration()
         if way=='2': 
-            flag = sign_in(flag) 
+            flag, login = sign_in(flag) 
     else:#если уже вошли
         print()  
-        way=input('Что вы хотите сделать? 1-выйти из аккаунта 2-выйти из программы>>>''')
+        way=input('Что вы хотите сделать? 1-выйти из аккаунта 2-выйти из программы,3 - открыть чат,4-поиграть в игру>>>''')
         if way=='1':
             flag= False
-        if way=='2':
-          print('Всего доброго!')
-          break
+        elif way=='2':
+            print('Всего доброго!')
+            break
+        elif way=='3': 
+            chat(login)
+        elif way=='4':
+            number_game.game()
 # if flag==True:  
 #     vegetables=116
 #     children=23
@@ -99,4 +120,3 @@ while True:#о тех пор пока заблокировано
 #     eggs=True
 #     if eggs==True:    
 #         print(10*bread)
- 
