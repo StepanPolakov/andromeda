@@ -29,3 +29,6 @@ class monster:
         self.weakness=weakness
     def search(self):
         print(f'{self.look}{self. name} ищет тебя...')
+
+class Student:
+    def __init__(self,):
