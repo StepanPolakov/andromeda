@@ -1,6 +1,12 @@
+
+import random
+import cowsay
+
+
+
 def cows_bulls():
     import random
-    print('''Компьютер загадал четырёхзначное число.Твоя задача- отгадать.
+    cowsay.turtle('''Компьютер загадал четырёхзначное число.Твоя задача- отгадать.
     Если угадал число-это корова,
     если угадал место-бык''')
     number=random.randint(1000,9999)
@@ -20,7 +26,9 @@ def cows_bulls():
             if user_number[i] ==list[i]:
                 bulls+=1
                 cows-=1
-        print(f'У вас {cows} коров и {bulls} быков')
+        cowsay.turtle(f'У вас {cows} коров и {bulls} быков')
         if  bulls == 4:
-            print('Вы победили!') 
+            cowsay.turtle('Вы победили!') 
             break
+if __name__=='__main__':
+    cows_bulls()

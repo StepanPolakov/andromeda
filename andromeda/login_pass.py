@@ -4,6 +4,7 @@ import number_game
 import mortal_kombat
 import cycle
 import cows_and_bulls
+import my_lib
 KEY=3
 def crypt_password(password,key):
 
@@ -84,6 +85,7 @@ password_list=read_users('passwords.txt')#список паролей
     
 flag=False
 while True:#до тех пор пока заблокировано
+    my_lib.download()
     if flag==False:#если мы не вошли
         way=input('Что вы хотите сделать? 1-зарегистрироваться ,2-войти ')
         if way=='1':
